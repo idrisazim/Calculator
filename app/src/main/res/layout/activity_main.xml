@@ -1,20 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <ImageView
+        android:id="@+id/sil"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/esit"
+        app:layout_constraintStart_toEndOf="@+id/virgulSayi"
+        app:layout_constraintTop_toBottomOf="@+id/ucSayi"
+        app:srcCompat="@drawable/sil" />
+
+    <ImageView
+        android:id="@+id/virgulSayi"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sil"
+        app:layout_constraintStart_toEndOf="@+id/sifirSayi"
+        app:layout_constraintTop_toBottomOf="@+id/ikiSayi"
+        app:srcCompat="@drawable/virgul" />
+
+    <ImageView
+        android:id="@+id/sifirSayi"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/virgulSayi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birSayi"
+        app:srcCompat="@drawable/sifir" />
+
+    <ImageView
+        android:id="@+id/ucSayi"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toTopOf="@+id/sil"
+        app:layout_constraintEnd_toStartOf="@+id/ekleme"
+        app:layout_constraintStart_toEndOf="@+id/ikiSayi"
+        app:layout_constraintTop_toBottomOf="@+id/altiSayi"
+        app:srcCompat="@drawable/uc" />
+
+    <ImageView
+        android:id="@+id/ikiSayi"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/virgulSayi"
+        app:layout_constraintEnd_toStartOf="@+id/ucSayi"
+        app:layout_constraintStart_toEndOf="@+id/birSayi"
+        app:layout_constraintTop_toBottomOf="@+id/besSayi"
+        app:srcCompat="@drawable/iki" />
+
+    <ImageView
+        android:id="@+id/ekleme"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/esit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ucSayi"
+        app:layout_constraintTop_toBottomOf="@+id/altiSayi"
+        app:srcCompat="@drawable/plus" />
+
+    <ImageView
+        android:id="@+id/esit"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sil"
+        app:layout_constraintTop_toBottomOf="@+id/ucSayi"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/equal" />
+
+    <ImageView
+        android:id="@+id/carpma"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/cikarma"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dokuzSayi"
+        app:layout_constraintTop_toBottomOf="@+id/bolme"
+        app:srcCompat="@drawable/multiply" />
+
+    <ImageView
+        android:id="@+id/bolme"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="194dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/carpma"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/yuzde"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/divide" />
+
+    <ImageView
+        android:id="@+id/parantez"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        app:layout_goneMarginTop="20dp"
+        android:layout_marginTop="194dp"
+        app:layout_constraintBottom_toTopOf="@+id/sekizSayi"
+        app:layout_constraintEnd_toStartOf="@+id/yuzde"
+        app:layout_constraintStart_toEndOf="@+id/hepsiniSil"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/parantez" />
+
+    <ImageView
+        android:id="@+id/hepsiniSil"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="194dp"
+        app:layout_constraintBottom_toTopOf="@+id/yediSayi"
+        app:layout_constraintEnd_toStartOf="@+id/parantez"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/c" />
+
+    <ImageView
+        android:id="@+id/birSayi"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="9dp"
+        app:layout_constraintBottom_toTopOf="@+id/sifirSayi"
+        app:layout_constraintEnd_toStartOf="@+id/ikiSayi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dortSayi"
+        app:srcCompat="@drawable/bir" />
+
+    <ImageView
+        android:id="@+id/dortSayi"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="9dp"
+        app:layout_constraintBottom_toTopOf="@+id/birSayi"
+        app:layout_constraintEnd_toStartOf="@+id/besSayi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yediSayi"
+        app:srcCompat="@drawable/dort" />
+
+    <ImageView
+        android:id="@+id/altiSayi"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toTopOf="@+id/ucSayi"
+        app:layout_constraintEnd_toStartOf="@+id/cikarma"
+        app:layout_constraintStart_toEndOf="@+id/besSayi"
+        app:layout_constraintTop_toBottomOf="@+id/dokuzSayi"
+        app:srcCompat="@drawable/alti" />
+
+    <ImageView
+        android:id="@+id/besSayi"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/ikiSayi"
+        app:layout_constraintEnd_toStartOf="@+id/altiSayi"
+        app:layout_constraintStart_toEndOf="@+id/dortSayi"
+        app:layout_constraintTop_toBottomOf="@+id/sekizSayi"
+        app:srcCompat="@drawable/bes" />
+
+    <ImageView
+        android:id="@+id/yediSayi"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="9dp"
+        app:layout_constraintBottom_toTopOf="@+id/dortSayi"
+        app:layout_constraintEnd_toStartOf="@+id/sekizSayi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hepsiniSil"
+        app:srcCompat="@drawable/yedi" />
+
+    <ImageView
+        android:id="@+id/sekizSayi"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/besSayi"
+        app:layout_constraintEnd_toStartOf="@+id/dokuzSayi"
+        app:layout_constraintStart_toEndOf="@+id/yediSayi"
+        app:layout_constraintTop_toBottomOf="@+id/parantez"
+        app:srcCompat="@drawable/sekiz" />
+
+    <ImageView
+        android:id="@+id/dokuzSayi"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toTopOf="@+id/altiSayi"
+        app:layout_constraintEnd_toStartOf="@+id/carpma"
+        app:layout_constraintStart_toEndOf="@+id/sekizSayi"
+        app:layout_constraintTop_toBottomOf="@+id/yuzde"
+        app:srcCompat="@drawable/dokuz" />
+
+    <ImageView
+        android:id="@+id/yuzde"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="194dp"
+        app:layout_constraintBottom_toTopOf="@+id/dokuzSayi"
+        app:layout_constraintEnd_toStartOf="@+id/bolme"
+        app:layout_constraintStart_toEndOf="@+id/parantez"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/yuzde" />
+
+    <ImageView
+        android:id="@+id/cikarma"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/ekleme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/altiSayi"
+        app:layout_constraintTop_toBottomOf="@+id/carpma"
+        app:srcCompat="@drawable/minus" />
+
+    <TextView
+        android:id="@+id/islemText"
+        android:layout_width="371dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="69dp"
+        android:gravity="right"
+        android:hint="126"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/parantez"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
