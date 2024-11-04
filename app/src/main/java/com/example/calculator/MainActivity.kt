@@ -7,6 +7,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.calculator.databinding.ActivityMainBinding
 
+public var sonuc = ""
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
