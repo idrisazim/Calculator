@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.calculator.databinding.ActivityMainBinding
+import kotlin.time.times
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -79,7 +80,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private fun ekle() {
         val currentInput = girdi.toIntOrNull() ?: 0
 
@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
         var currentInput = girdi.toFloatOrNull() ?: 0f
 
         binding.operatorSign.text = "-"
-        currentInput -= ilkIslenen
+        ilkIslenen -= currentInput
 
         binding.islemText.text = ilkIslenen.toString()
 
@@ -115,19 +115,26 @@ class MainActivity : AppCompatActivity() {
         gecmis+= "\nilkIslenen"
     }
     private fun carpma() {
-        val currentInput = girdi.toIntOrNull() ?: 0
+        val currentInput = girdi.toFloatOrNull() ?: 1f
+        if (ilkIslenen == 0f) {
+            ilkIslenen = currentInput
+        } else {
+            ilkIslenen *= currentInput
+        }
 
         binding.operatorSign.text = "*"
-        ilkIslenen *= currentInput
 
-        binding.islemText.text = ilkIslenen.toString()
-
+        binding.islemText.text = if (ilkIslenen % 1 == 0f) {
+            ilkIslenen.toInt().toString()
+        } else {
+            ilkIslenen.toString()
+        }
         girdi = ""
-
-        gecmis+= "\nilkIslenen"
+        gecmis += "\n$ilkIslenen"
     }
     private fun bolme() {
-        val currentInput = girdi.toIntOrNull() ?: 0
+        ilkIslenen = 1f
+        val currentInput = girdi.toFloatOrNull() ?: 0f
 
         binding.operatorSign.text = "/"
         ilkIslenen /= currentInput
@@ -139,12 +146,12 @@ class MainActivity : AppCompatActivity() {
         gecmis+= "\nilkIslenen"
     }
     private fun yuzde() {
-        val currentInput = girdi.toIntOrNull() ?: 0
+        var currentInput = girdi.toFloatOrNull() ?: 0f
 
-        binding.operatorSign.text = "/"
-        ilkIslenen *= 0.01f
+        binding.operatorSign.text = "%"
+        currentInput *= 0.01f
 
-        binding.islemText.text = "${ilkIslenen}%"
+        binding.islemText.text = "${currentInput}%"
         girdi = ""
 
         gecmis+= "\nilkIslenen"
