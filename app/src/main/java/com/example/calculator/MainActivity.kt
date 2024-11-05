@@ -86,8 +86,6 @@ class MainActivity : AppCompatActivity() {
     private fun silme() {
         if (girdi.isNotEmpty()) {
             girdi = girdi.dropLast(1)
-
-
             binding.islemText.text = girdi
         }
     }
@@ -179,7 +177,6 @@ class MainActivity : AppCompatActivity() {
     private fun esit() {
          currentInput = girdi.toFloatOrNull() ?: 0f
 
-        // Calculate final result based on the operator
         when (binding.operatorSign.text) {
             "+" -> ilkIslenen += currentInput
             "-" -> ilkIslenen -= currentInput
@@ -187,14 +184,11 @@ class MainActivity : AppCompatActivity() {
             "/" -> if (currentInput != 0f) ilkIslenen /= currentInput else binding.islemText.text = "Error"
         }
 
-        // Display the final result
         binding.islemText.text = if (ilkIslenen % 1 == 0f) ilkIslenen.toInt().toString() else ilkIslenen.toString()
-        binding.operatorSign.text = ""  // Clear operator
+        binding.operatorSign.text = ""
 
-        // Update `gecmis` to reflect the full calculation
         gecmis += "$currentInput = $ilkIslenen\n"
 
-        // Clear `girdi` for next calculation
         girdi = ""
     }
 
