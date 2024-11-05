@@ -92,10 +92,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun ekle() {
         val currentInput = girdi.toIntOrNull() ?: 0
-
         binding.operatorSign.text = "+"
         ilkIslenen += currentInput
-
         binding.islemText.text = ilkIslenen.toString()
 
         girdi = ""
