@@ -24,6 +24,9 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        binding.sil.setOnClickListener{
+            silme()
+        }
 
         binding.hepsiniSil.setOnClickListener {
             hepsiniSil()
@@ -59,6 +62,9 @@ class MainActivity : AppCompatActivity() {
             dokuzSayi()
         }
     }
+
+    //rakam butonlarina basma islemleri:
+
     private fun hepsiniSil() {
         girdi = ""
         binding.islemText.text = girdi
@@ -104,4 +110,21 @@ class MainActivity : AppCompatActivity() {
         girdi += "0"
         binding.islemText.text = girdi
     }
+
+    //bir rakam silme islemi
+    private fun silme() {
+        if (girdi.isNotEmpty()) {
+            girdi = girdi.dropLast(1)
+            binding.islemText.text = girdi
+        } else {
+             girdi = ""
+        }
+    }
+
+    private fun ekle(){
+        girdi.toInt()
+        binding.islemText.text = girdi
+    }
+
+
 }
