@@ -115,12 +115,12 @@
         android:id="@+id/parantez"
         android:layout_width="100dp"
         android:layout_height="90dp"
-        app:layout_goneMarginTop="20dp"
         android:layout_marginTop="194dp"
         app:layout_constraintBottom_toTopOf="@+id/sekizSayi"
         app:layout_constraintEnd_toStartOf="@+id/yuzde"
         app:layout_constraintStart_toEndOf="@+id/hepsiniSil"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginTop="20dp"
         app:srcCompat="@drawable/parantez" />
 
     <ImageView
@@ -139,6 +139,7 @@
         android:id="@+id/birSayi"
         android:layout_width="100dp"
         android:layout_height="90dp"
+        android:onClick="birSayi"
         android:layout_marginStart="9dp"
         app:layout_constraintBottom_toTopOf="@+id/sifirSayi"
         app:layout_constraintEnd_toStartOf="@+id/ikiSayi"
@@ -241,7 +242,6 @@
         android:layout_marginEnd="42dp"
         android:layout_marginBottom="69dp"
         android:gravity="right"
-        android:hint="126"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="50sp"
