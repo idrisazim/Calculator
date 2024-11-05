@@ -252,4 +252,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/operatorSign"
+        android:layout_width="106dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="278dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="18dp"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/bolme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/islemText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

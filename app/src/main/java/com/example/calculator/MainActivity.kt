@@ -11,6 +11,7 @@ import com.example.calculator.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var girdi = ""
+    private var sonuc = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +27,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.sil.setOnClickListener{
             silme()
+        }
+        binding.ekleme.setOnClickListener{
+            ekle()
         }
 
         binding.hepsiniSil.setOnClickListener {
@@ -68,9 +72,14 @@ class MainActivity : AppCompatActivity() {
     private fun hepsiniSil() {
         girdi = ""
         binding.islemText.text = girdi
+        binding.operatorSign.text = ""
     }
 
     private fun birSayi() {
+        if (binding.operatorSign.text == "+"){
+            girdi = "0"
+            binding.operatorSign.text = ""
+        }
         girdi += "1"
         binding.islemText.text = girdi
     }
@@ -122,8 +131,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun ekle(){
-        girdi.toInt()
-        binding.islemText.text = girdi
+        var string1 = girdi
+        var string2 = ""
+        binding.operatorSign.text = "+"
+        girdi = ""
+        string2 = binding.islemText.text.toString()
+        sonuc = string1.toInt() + string2.toInt()
+
+
+
     }
 
 
