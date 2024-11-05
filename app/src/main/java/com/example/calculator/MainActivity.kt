@@ -7,12 +7,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.calculator.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var girdi = ""
-    private var sonuc = 0
-
+    private var firstOperand = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,127 +18,58 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         enableEdgeToEdge()
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        binding.sil.setOnClickListener{
-            silme()
-        }
-        binding.ekleme.setOnClickListener{
-            ekle()
-        }
 
-        binding.hepsiniSil.setOnClickListener {
-            hepsiniSil()
-        }
-        binding.sifirSayi.setOnClickListener {
-            sifirSayi()
-        }
-        binding.birSayi.setOnClickListener {
-            birSayi()
-        }
-        binding.ikiSayi.setOnClickListener {
-            ikiSayi()
-        }
-        binding.ucSayi.setOnClickListener {
-            ucSayi()
-        }
-        binding.dortSayi.setOnClickListener {
-            dortSayi()
-        }
-        binding.besSayi.setOnClickListener {
-            besSayi()
-        }
-        binding.altiSayi.setOnClickListener {
-            altiSayi()
-        }
-        binding.yediSayi.setOnClickListener {
-            yediSayi()
-        }
-        binding.sekizSayi.setOnClickListener {
-            sekizSayi()
-        }
-        binding.dokuzSayi.setOnClickListener {
-            dokuzSayi()
-        }
+        binding.sil.setOnClickListener { silme() }
+        binding.ekleme.setOnClickListener { ekle() }
+        binding.hepsiniSil.setOnClickListener { hepsiniSil() }
+        binding.sifirSayi.setOnClickListener { appendNumber("0") }
+        binding.birSayi.setOnClickListener { appendNumber("1") }
+        binding.ikiSayi.setOnClickListener { appendNumber("2") }
+        binding.ucSayi.setOnClickListener { appendNumber("3") }
+        binding.dortSayi.setOnClickListener { appendNumber("4") }
+        binding.besSayi.setOnClickListener { appendNumber("5") }
+        binding.altiSayi.setOnClickListener { appendNumber("6") }
+        binding.yediSayi.setOnClickListener { appendNumber("7") }
+        binding.sekizSayi.setOnClickListener { appendNumber("8") }
+        binding.dokuzSayi.setOnClickListener { appendNumber("9") }
     }
-
-    //rakam butonlarina basma islemleri:
 
     private fun hepsiniSil() {
         girdi = ""
-        binding.islemText.text = girdi
+        firstOperand = 0
+        binding.islemText.text = ""
         binding.operatorSign.text = ""
     }
 
-    private fun birSayi() {
-        if (binding.operatorSign.text == "+"){
-            girdi = "0"
-            binding.operatorSign.text = ""
-        }
-        girdi += "1"
-        binding.islemText.text = girdi
-    }
-    private fun ikiSayi() {
-        girdi += "2"
-        binding.islemText.text = girdi
-    }
-    private fun ucSayi() {
-        girdi += "3"
-        binding.islemText.text = girdi
-    }
-    private fun dortSayi() {
-        girdi += "4"
-        binding.islemText.text = girdi
-    }
-    private fun besSayi() {
-        girdi += "5"
-        binding.islemText.text = girdi
-    }
-    private fun altiSayi() {
-        girdi += "6"
-        binding.islemText.text = girdi
-    }
-    private fun yediSayi() {
-        girdi += "7"
-        binding.islemText.text = girdi
-    }
-    private fun sekizSayi() {
-        girdi += "8"
-        binding.islemText.text = girdi
-    }
-    private fun dokuzSayi() {
-        girdi += "9"
-        binding.islemText.text = girdi
-    }
-    private fun sifirSayi() {
-        girdi += "0"
+    private fun appendNumber(number: String) {
+        girdi += number
         binding.islemText.text = girdi
     }
 
-    //bir rakam silme islemi
     private fun silme() {
         if (girdi.isNotEmpty()) {
             girdi = girdi.dropLast(1)
             binding.islemText.text = girdi
-        } else {
-             girdi = ""
         }
     }
 
-    private fun ekle(){
-        var string1 = girdi
-        var string2 = ""
+    private fun ekle() {
+        // Parse `girdi` to an integer or default to 0 if parsing fails
+        val currentInput = girdi.toIntOrNull() ?: 0
         binding.operatorSign.text = "+"
+        // Add the current input to the running total
+        firstOperand += currentInput
+
+        // Display the updated total
+        binding.islemText.text = firstOperand.toString()
+
+        // Reset `girdi` for the next input
         girdi = ""
-        string2 = binding.islemText.text.toString()
-        sonuc = string1.toInt() + string2.toInt()
-
-
-
     }
-
-
 }
