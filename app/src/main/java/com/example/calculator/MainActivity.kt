@@ -1,5 +1,6 @@
 package com.example.calculator
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,12 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         enableEdgeToEdge()
+
+        binding.gecmis.setOnClickListener {
+            val intent = Intent(this, Gecmis::class.java)
+            intent.putExtra("gecmis", gecmis)
+            startActivity(intent)
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -58,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         binding.dokuzSayi.setOnClickListener { appendNumber("9") }
     }
 
+
     private fun hepsiniSil() {
         girdi = ""
         ilkIslenen = 0f
@@ -65,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         binding.operatorSign.text = ""
         sonuc = 0f
         binding.sonuc.text = ""
+        gecmis = ""
 
     }
 
@@ -89,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         binding.islemText.text = ilkIslenen.toString()
 
         girdi = ""
-        gecmis+= "\nilkIslenen"
+        gecmis+= "$ilkIslenen\n+ "
     }
     private fun ekleFloat() {
         val currentInput = girdi.toFloatOrNull() ?: 0f
@@ -100,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         binding.islemText.text = ilkIslenen.toString()
 
         girdi = ""
-        gecmis+= "\nilkIslenen"
+        gecmis+= "\n+\n $ilkIslenen"
     }
     private fun cikarma() {
         var currentInput = girdi.toFloatOrNull() ?: 0f
@@ -112,7 +121,7 @@ class MainActivity : AppCompatActivity() {
 
         girdi = ""
 
-        gecmis+= "\nilkIslenen"
+        gecmis+= "\n-\n $ilkIslenen"
     }
     private fun carpma() {
         val currentInput = girdi.toFloatOrNull() ?: 1f
@@ -130,7 +139,7 @@ class MainActivity : AppCompatActivity() {
             ilkIslenen.toString()
         }
         girdi = ""
-        gecmis += "\n$ilkIslenen"
+        gecmis += "\n * \n $ilkIslenen"
     }
     private fun bolme() {
         ilkIslenen = 1f
@@ -143,7 +152,7 @@ class MainActivity : AppCompatActivity() {
 
         girdi = ""
 
-        gecmis+= "\nilkIslenen"
+        gecmis+= "\n / \n $ilkIslenen"
     }
     private fun yuzde() {
         var currentInput = girdi.toFloatOrNull() ?: 0f
@@ -154,20 +163,21 @@ class MainActivity : AppCompatActivity() {
         binding.islemText.text = "${currentInput}%"
         girdi = ""
 
-        gecmis+= "\nilkIslenen"
+        gecmis+= "\n%\n $ilkIslenen"
     }
     private fun esit() {
 
         binding.islemText.text = if (ilkIslenen % 1 == 0f) {
-            ilkIslenen.toInt().toString()  // Show as integer if there's no fractional part
+            ilkIslenen.toInt().toString()
         } else {
-            ilkIslenen.toString()  // Show as float if there's a fractional part
+            ilkIslenen.toString()
         }
 
-        // Clear `girdi` and operator sign to start fresh for next calculations
         girdi = ""
         binding.operatorSign.text = ""
 
-        gecmis+= "\nilkIslenen"
+        gecmis+= "\n =$ilkIslenen"
     }
+
+
 }
