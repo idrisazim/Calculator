@@ -139,7 +139,6 @@
         android:id="@+id/birSayi"
         android:layout_width="100dp"
         android:layout_height="90dp"
-        android:onClick="birSayi"
         android:layout_marginStart="9dp"
         app:layout_constraintBottom_toTopOf="@+id/sifirSayi"
         app:layout_constraintEnd_toStartOf="@+id/ikiSayi"
@@ -254,19 +253,34 @@
 
     <TextView
         android:id="@+id/operatorSign"
-        android:layout_width="106dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="278dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="18dp"
+        android:layout_width="71dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="214dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="1dp"
         android:gravity="center"
         android:text=""
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/yuzde"
+        app:layout_constraintEnd_toStartOf="@+id/sonuc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/islemText" />
+
+    <TextView
+        android:id="@+id/sonuc"
+        android:layout_width="152dp"
+        android:gravity="left"
+        android:layout_height="65dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="4dp"
+        android:textColor="@color/white"
+        android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/bolme"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/operatorSign"
         app:layout_constraintTop_toBottomOf="@+id/islemText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

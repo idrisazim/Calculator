@@ -10,7 +10,9 @@ import com.example.calculator.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var girdi = ""
-    private var firstOperand = 0
+    private var ilkIslenen = 0f
+    private var sonuc = 0f
+    private var gecmis = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +28,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.sil.setOnClickListener { silme() }
-        binding.ekleme.setOnClickListener { ekle() }
+
+        binding.ekleme.setOnClickListener {
+            when {
+                girdi.toIntOrNull() != null -> {
+                    ekle()
+                }
+                girdi.toFloatOrNull() != null -> {
+                    ekleFloat()
+                }
+            }
+        }
+        binding.yuzde.setOnClickListener { yuzde() }
+        binding.esit.setOnClickListener { esit() }
         binding.hepsiniSil.setOnClickListener { hepsiniSil() }
+        binding.cikarma.setOnClickListener{ cikarma() }
+        binding.carpma.setOnClickListener { carpma() }
+        binding.bolme.setOnClickListener { bolme() }
         binding.sifirSayi.setOnClickListener { appendNumber("0") }
         binding.birSayi.setOnClickListener { appendNumber("1") }
         binding.ikiSayi.setOnClickListener { appendNumber("2") }
@@ -42,9 +59,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun hepsiniSil() {
         girdi = ""
-        firstOperand = 0
+        ilkIslenen = 0f
         binding.islemText.text = ""
         binding.operatorSign.text = ""
+        sonuc = 0f
+        binding.sonuc.text = ""
+
     }
 
     private fun appendNumber(number: String) {
@@ -59,17 +79,88 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private fun ekle() {
-        // Parse `girdi` to an integer or default to 0 if parsing fails
         val currentInput = girdi.toIntOrNull() ?: 0
+
         binding.operatorSign.text = "+"
-        // Add the current input to the running total
-        firstOperand += currentInput
+        ilkIslenen += currentInput
 
-        // Display the updated total
-        binding.islemText.text = firstOperand.toString()
+        binding.islemText.text = ilkIslenen.toString()
 
-        // Reset `girdi` for the next input
         girdi = ""
+        gecmis+= "\nilkIslenen"
+    }
+    private fun ekleFloat() {
+        val currentInput = girdi.toFloatOrNull() ?: 0f
+
+        binding.operatorSign.text = "+"
+        ilkIslenen += currentInput
+
+        binding.islemText.text = ilkIslenen.toString()
+
+        girdi = ""
+        gecmis+= "\nilkIslenen"
+    }
+    private fun cikarma() {
+        var currentInput = girdi.toFloatOrNull() ?: 0f
+
+        binding.operatorSign.text = "-"
+        currentInput -= ilkIslenen
+
+        binding.islemText.text = ilkIslenen.toString()
+
+        girdi = ""
+
+        gecmis+= "\nilkIslenen"
+    }
+    private fun carpma() {
+        val currentInput = girdi.toIntOrNull() ?: 0
+
+        binding.operatorSign.text = "*"
+        ilkIslenen *= currentInput
+
+        binding.islemText.text = ilkIslenen.toString()
+
+        girdi = ""
+
+        gecmis+= "\nilkIslenen"
+    }
+    private fun bolme() {
+        val currentInput = girdi.toIntOrNull() ?: 0
+
+        binding.operatorSign.text = "/"
+        ilkIslenen /= currentInput
+
+        binding.islemText.text = ilkIslenen.toString()
+
+        girdi = ""
+
+        gecmis+= "\nilkIslenen"
+    }
+    private fun yuzde() {
+        val currentInput = girdi.toIntOrNull() ?: 0
+
+        binding.operatorSign.text = "/"
+        ilkIslenen *= 0.01f
+
+        binding.islemText.text = "${ilkIslenen}%"
+        girdi = ""
+
+        gecmis+= "\nilkIslenen"
+    }
+    private fun esit() {
+
+        binding.islemText.text = if (ilkIslenen % 1 == 0f) {
+            ilkIslenen.toInt().toString()  // Show as integer if there's no fractional part
+        } else {
+            ilkIslenen.toString()  // Show as float if there's a fractional part
+        }
+
+        // Clear `girdi` and operator sign to start fresh for next calculations
+        girdi = ""
+        binding.operatorSign.text = ""
+
+        gecmis+= "\nilkIslenen"
     }
 }
