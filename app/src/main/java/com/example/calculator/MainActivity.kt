@@ -48,10 +48,22 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        binding.cikarma.setOnClickListener {
+            when {
+                girdi.toIntOrNull() != null -> {
+                    cikarma()
+                }
+                girdi.toFloatOrNull() != null -> {
+                    cikarmaFloat()
+                }
+            }
+        }
+
+
         binding.yuzde.setOnClickListener { yuzde() }
         binding.esit.setOnClickListener { esit() }
         binding.hepsiniSil.setOnClickListener { hepsiniSil() }
-        binding.cikarma.setOnClickListener{ cikarma() }
         binding.carpma.setOnClickListener { carpma() }
         binding.bolme.setOnClickListener { bolme() }
         binding.sifirSayi.setOnClickListener { appendNumber("0") }
@@ -64,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         binding.yediSayi.setOnClickListener { appendNumber("7") }
         binding.sekizSayi.setOnClickListener { appendNumber("8") }
         binding.dokuzSayi.setOnClickListener { appendNumber("9") }
+        binding.virgulSayi.setOnClickListener { appendNumberVirgul() }
     }
 
 
@@ -77,7 +90,10 @@ class MainActivity : AppCompatActivity() {
         gecmis = ""
 
     }
-
+    private fun appendNumberVirgul(){
+        girdi+= "."
+        binding.islemText.text = girdi
+    }
     private fun appendNumber(number: String) {
         girdi += number
         binding.islemText.text = girdi
@@ -101,35 +117,32 @@ class MainActivity : AppCompatActivity() {
     }
     private fun ekleFloat() {
         val currentInput = girdi.toFloatOrNull() ?: 0f
-
-        if (binding.operatorSign.text == "+") {
-            // Update `ilkIslenen` and clear `girdi`
-            ilkIslenen += currentInput
-            girdi = ""
-        } else {
-            // For the first addition, initialize `ilkIslenen`
-            ilkIslenen = currentInput
-        }
-
-        // Set the operator and update the displayed result
         binding.operatorSign.text = "+"
-        binding.islemText.text = if (ilkIslenen % 1 == 0f) ilkIslenen.toInt().toString() else ilkIslenen.toString()
-
-        // Update `gecmis` with the expression
-        gecmis += if (gecmis.isEmpty()) "$currentInput + " else "$currentInput + "
-    }
-    private fun cikarma() {
-        var currentInput = girdi.toFloatOrNull() ?: 0f
-
-        binding.operatorSign.text = "-"
-        ilkIslenen -= currentInput
-
+        ilkIslenen += currentInput
         binding.islemText.text = ilkIslenen.toString()
 
         girdi = ""
-
-        gecmis+= "\n-\n $ilkIslenen"
+        gecmis+= "$ilkIslenen\n+ "
     }
+    private fun cikarma() {
+        val currentInput = girdi.toIntOrNull() ?: 0
+        binding.operatorSign.text = "-"
+        ilkIslenen = currentInput - ilkIslenen
+        binding.islemText.text = ilkIslenen.toString()
+
+        girdi = ""
+        gecmis+= "$ilkIslenen - "
+    }
+    private fun cikarmaFloat() {
+        val currentInput = girdi.toFloatOrNull() ?: 0f
+        binding.operatorSign.text = "-"
+        ilkIslenen = currentInput - ilkIslenen
+        binding.islemText.text = ilkIslenen.toString()
+
+        girdi = ""
+        gecmis+= "$ilkIslenen- "
+    }
+
     private fun carpma() {
         val currentInput = girdi.toFloatOrNull() ?: 1f
         if (ilkIslenen == 0f) {
@@ -150,17 +163,23 @@ class MainActivity : AppCompatActivity() {
         girdi = ""
     }
     private fun bolme() {
-        ilkIslenen = 1f
         val currentInput = girdi.toFloatOrNull() ?: 0f
+        if (ilkIslenen == 0f) {
+            ilkIslenen = currentInput
+        } else {
+            ilkIslenen /= currentInput
+        }
 
         binding.operatorSign.text = "/"
-        ilkIslenen /= currentInput
 
-        binding.islemText.text = ilkIslenen.toString()
+        binding.islemText.text = if (ilkIslenen % 1 == 0f) {
+            ilkIslenen.toInt().toString()
+        } else {
+            ilkIslenen.toString()
+        }
 
+        gecmis += "$currentInput *"
         girdi = ""
-
-        gecmis+= "\n / \n $ilkIslenen"
     }
     private fun yuzde() {
         var currentInput = girdi.toFloatOrNull() ?: 0f
@@ -182,7 +201,7 @@ class MainActivity : AppCompatActivity() {
             "/" -> if (currentInput != 0f) ilkIslenen /= currentInput else binding.islemText.text = "Error"
         }
 
-        binding.islemText.text = if (ilkIslenen % 1 == 0f) ilkIslenen.toInt().toString() else ilkIslenen.toString()
+        binding.islemText.text = if (ilkIslenen % 1 == 0f) ilkIslenen.toInt().toString() else if (ilkIslenen % 1 != 0f) ilkIslenen.toFloat().toString() else ilkIslenen.toString()
         binding.operatorSign.text = ""
 
         gecmis += "$currentInput = $ilkIslenen\n"
