@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var girdi = ""
     private var ilkIslenen = 0f
-    private var sonuc = 0f
     private var gecmis = ""
     private var currentInput = 0f
 
@@ -85,7 +84,6 @@ class MainActivity : AppCompatActivity() {
         ilkIslenen = 0f
         binding.islemText.text = ""
         binding.operatorSign.text = ""
-        sonuc = 0f
         binding.sonuc.text = ""
         gecmis = ""
 
@@ -113,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         binding.islemText.text = ilkIslenen.toString()
 
         girdi = ""
-        gecmis+= "$ilkIslenen\n+ "
+        gecmis+= "$ilkIslenen+ "
     }
     private fun ekleFloat() {
         val currentInput = girdi.toFloatOrNull() ?: 0f
@@ -122,7 +120,7 @@ class MainActivity : AppCompatActivity() {
         binding.islemText.text = ilkIslenen.toString()
 
         girdi = ""
-        gecmis+= "$ilkIslenen\n+ "
+        gecmis+= "$ilkIslenen+ "
     }
     private fun cikarma() {
         val currentInput = girdi.toIntOrNull() ?: 0
@@ -205,7 +203,7 @@ class MainActivity : AppCompatActivity() {
         binding.operatorSign.text = ""
 
         gecmis += "$currentInput = $ilkIslenen\n"
-
+        ilkIslenen = 0f
         girdi = ""
     }
 
