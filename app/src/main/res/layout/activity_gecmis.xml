@@ -10,7 +10,7 @@
     tools:context=".Gecmis">
 
     <TextView
-        android:id="@+id/gecmis2"
+        android:id="@+id/gecmisTextView"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

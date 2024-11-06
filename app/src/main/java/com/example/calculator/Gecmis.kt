@@ -22,8 +22,8 @@ class Gecmis : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val gecmis2: String = intent.getStringExtra("gecmis").toString()
-        binding.gecmis2.text = gecmis2
+        val gecmis: String = intent.getStringExtra("gecmis").toString()
+        binding.gecmisTextView.text = gecmis
     }
 
 

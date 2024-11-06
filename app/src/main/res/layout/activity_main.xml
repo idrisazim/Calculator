@@ -248,7 +248,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/operatorSign"
+        android:id="@+id/islem_isareti"
         android:layout_width="71dp"
         android:layout_height="51dp"
         android:layout_marginStart="214dp"
@@ -276,7 +276,7 @@
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/bolme"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/operatorSign"
+        app:layout_constraintStart_toEndOf="@+id/islem_isareti"
         app:layout_constraintTop_toBottomOf="@+id/islemText" />
 
     <TextView
@@ -291,7 +291,7 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/hepsiniSil"
-        app:layout_constraintEnd_toStartOf="@+id/operatorSign"
+        app:layout_constraintEnd_toStartOf="@+id/islem_isareti"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/islemText"
