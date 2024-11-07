@@ -35,35 +35,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.sil.setOnClickListener { silme() }
-
-        binding.ekleme.setOnClickListener {
-            when {
-                girdi.toIntOrNull() != null -> {
-                    ekle()
-                }
-                girdi.toFloatOrNull() != null -> {
-                    ekleFloat()
-                }
-            }
-        }
-
-        binding.cikarma.setOnClickListener {
-            when {
-                girdi.toIntOrNull() != null -> {
-                    cikarma()
-                }
-                girdi.toFloatOrNull() != null -> {
-                    cikarmaFloat()
-                }
-            }
-        }
-
+        binding.ekleme.setOnClickListener { ekle() }
+        binding.cikarma.setOnClickListener { cikarma() }
+        binding.carpma.setOnClickListener { carpma() }
+        binding.bolme.setOnClickListener { bolme() }
 
         binding.yuzde.setOnClickListener { yuzde() }
         binding.esit.setOnClickListener { esit() }
         binding.hepsiniSil.setOnClickListener { hepsiniSil() }
-        binding.carpma.setOnClickListener { carpma() }
-        binding.bolme.setOnClickListener { bolme() }
+
         binding.sifirSayi.setOnClickListener { sayiButon("0") }
         binding.birSayi.setOnClickListener { sayiButon("1") }
         binding.ikiSayi.setOnClickListener { sayiButon("2") }
@@ -76,7 +56,6 @@ class MainActivity : AppCompatActivity() {
         binding.dokuzSayi.setOnClickListener { sayiButon("9") }
         binding.virgulSayi.setOnClickListener { sayiButon(".") }
     }
-
 
     private fun hepsiniSil() {
         girdi = ""
@@ -101,47 +80,43 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private fun ekle() {
-        val currentInput = girdi.toIntOrNull() ?: 0
-        binding.islemIsareti.text = "+"
-        ilkIslenen += currentInput
-        binding.islemText.text = ilkIslenen.toString()
-
-        girdi = ""
-        gecmis+= "$ilkIslenen + "
-    }
-
-    private fun ekleFloat() {
         val currentInput = girdi.toFloatOrNull() ?: 0f
         binding.islemIsareti.text = "+"
         ilkIslenen += currentInput
-        binding.islemText.text = ilkIslenen.toString()
+        if (ilkIslenen % 1 == 0f) {
+            binding.islemText.text = ilkIslenen.toInt().toString()
+            gecmis+= "${ilkIslenen.toInt()} + "
+        }
+        else {
+            binding.islemText.text = ilkIslenen.toString()
+            gecmis+= "$ilkIslenen + "
+        }
 
         girdi = ""
-        gecmis+= "$ilkIslenen + "
+
     }
 
     private fun cikarma() {
-        val currentInput = girdi.toIntOrNull() ?: 0
-        binding.islemIsareti.text = "-"
-        ilkIslenen = currentInput - ilkIslenen
-        binding.islemText.text = ilkIslenen.toString()
 
-        girdi = ""
-        gecmis+= "$ilkIslenen - "
-    }
-
-    private fun cikarmaFloat() {
         val currentInput = girdi.toFloatOrNull() ?: 0f
         binding.islemIsareti.text = "-"
         ilkIslenen = currentInput - ilkIslenen
-        binding.islemText.text = ilkIslenen.toString()
 
+        if (ilkIslenen % 1 == 0f) {
+            binding.islemText.text = ilkIslenen.toInt().toString()
+            gecmis+= "${ilkIslenen.toInt()} - "
+        }
+        else {
+            binding.islemText.text = ilkIslenen.toString()
+            gecmis+= "$ilkIslenen - "
+        }
         girdi = ""
-        gecmis+= "$ilkIslenen - "
     }
 
     private fun carpma() {
+
         val currentInput = girdi.toFloatOrNull() ?: 1f
         if (ilkIslenen == 0f) {
             ilkIslenen = currentInput
@@ -151,13 +126,15 @@ class MainActivity : AppCompatActivity() {
 
         binding.islemIsareti.text = "*"
 
-        binding.islemText.text = if (ilkIslenen % 1 == 0f) {
-            ilkIslenen.toInt().toString()
+        if (ilkIslenen % 1 == 0f) {
+            binding.islemText.text = ilkIslenen.toInt().toString()
+            gecmis += "${currentInput.toInt()} * "
+
         } else {
-            ilkIslenen.toString()
+            binding.islemText.text = ilkIslenen.toString()
+            gecmis += "$currentInput * "
         }
 
-        gecmis += "$currentInput * "
         girdi = ""
     }
 
@@ -171,13 +148,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.islemIsareti.text = "/"
 
-        binding.islemText.text = if (ilkIslenen % 1 == 0f) {
-            ilkIslenen.toInt().toString()
-        } else {
-            ilkIslenen.toString()
-        }
+        if (ilkIslenen % 1 == 0f) {
+            binding.islemText.text = ilkIslenen.toInt().toString()
+            gecmis += "${currentInput.toInt()} / "
 
-        gecmis += "$currentInput / "
+        } else {
+            binding.islemText.text = ilkIslenen.toString()
+            gecmis += "$currentInput / "
+        }
         girdi = ""
     }
 
@@ -187,8 +165,14 @@ class MainActivity : AppCompatActivity() {
         binding.islemIsareti.text = "%"
         ilkIslenen = currentInput
 
-        binding.islemText.text = "${currentInput}%"
-        gecmis+= "$currentInput % "
+        if (ilkIslenen % 1 == 0f) {
+            binding.islemText.text = "${currentInput.toInt()}%"
+            gecmis+= "${currentInput.toInt()} % "
+        }
+        else {
+            binding.islemText.text = "${currentInput}%"
+            gecmis+= "$currentInput % "
+        }
         girdi = ""
     }
 
@@ -199,14 +183,20 @@ class MainActivity : AppCompatActivity() {
             "+" -> ilkIslenen += currentInput
             "-" -> ilkIslenen -= currentInput
             "*" -> ilkIslenen *= currentInput
-            "/" -> if (currentInput != 0f) ilkIslenen /= currentInput else binding.islemText.text = "Error"
+            "/" -> ilkIslenen /= currentInput
             "%" -> ilkIslenen *= (currentInput / 100)
         }
 
         binding.islemText.text = if (ilkIslenen % 1 == 0f) ilkIslenen.toInt().toString() else ilkIslenen.toString()
         binding.islemIsareti.text = ""
 
-        gecmis += "$currentInput = $ilkIslenen\n"
+        if (ilkIslenen % 1 == 0f) {
+            gecmis += "${currentInput.toInt()} = ${ilkIslenen.toInt()}\n"
+        }
+        else {
+            gecmis += "$currentInput = $ilkIslenen\n"
+        }
+
         ilkIslenen = 0f
         girdi = ""
     }
