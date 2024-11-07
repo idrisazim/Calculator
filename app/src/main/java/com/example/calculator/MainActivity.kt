@@ -133,7 +133,6 @@ class MainActivity : AppCompatActivity() {
             binding.islemText.text = ilkIslenen.toString()
             gecmis += "$currentInput * "
         }
-
         girdi = ""
     }
 
@@ -195,7 +194,6 @@ class MainActivity : AppCompatActivity() {
         else {
             gecmis += "$currentInput = $ilkIslenen\n"
         }
-
         ilkIslenen = 0f
         girdi = ""
     }
