@@ -80,7 +80,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private fun ekle() {
         val currentInput = girdi.toFloatOrNull() ?: 0f
         binding.islemIsareti.text = "+"
